@@ -23,8 +23,8 @@ def main():
 			link = data[1]
 
 			urls = [
-            	#'https://github.com/shakacode/react-webpack-rails-tutorial'
-            	'https://github.com/shakacode/react-webpack-rails-tutorial/blob/master/spec/factories.rb'
+            	'https://github.com/shakacode/react-webpack-rails-tutorial'
+            	#'https://github.com/shakacode/react-webpack-rails-tutorial/blob/master/spec/factories.rb'
         	]
 
 			spider = Spider.BaseSpider(url_input = urls)
@@ -32,8 +32,10 @@ def main():
 
 			process.crawl(spider, start_urls = urls)
 			process.start() # the script will block here until the crawling is finished
-			
-			print(link)
-  
+
+			print("********* FINAL SPIDER URLS *********")
+			print(spider.downloadURLs)
+			print("********* FINAL SPIDER URLS *********")
+
 if __name__== "__main__":
   main()

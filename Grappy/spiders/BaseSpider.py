@@ -26,9 +26,17 @@ class BaseSpider(scrapy.Spider):
         print(len(next_directories))
 
         if (len(next_directories) > 0):
+            '''
             file = open('./temp/test.txt', "w")
             for item in next_directories:
                 file.write('https://github.com' + item + "\n")
             file.close()
+            '''
+            for item in next_directories:
+                next_url = 'https://github.com' + item
+                yield scrapy.Request(next_url, callback = self.parse)
         else:
-            print("NO MORE DIRECTORIES")
+            raw_url = response.selector.xpath("//a[@id=\"raw-url\"]/@href").extract()
+
+            if (len(raw_url) == 1):
+                self.downloadURLs.append(raw_url)
