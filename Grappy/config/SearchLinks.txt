@@ -1,0 +1,24 @@
+Paginated through link:
+TrendMicro, https://blog.trendmicro.com/?s=google+android+malware
+CrowdStrike, dynamic search engine
+Mcafee, https://securingtomorrow.mcafee.com/?s=google+android+malware
+ESET, https://www.welivesecurity.com/?s=google+android+malware
+Panda Security, https://www.pandasecurity.com/mediacenter/?s=google+android+malware
+Microsoft, https://cloudblogs.microsoft.com/?s=google+android+malware
+F-Secure, https://www.endgame.com/search/node/google%20android%20malware
+SentinelOne, https://www.sentinelone.com/?s=google+android+malware
+Endgame, https://www.endgame.com/search/node/google%20android%20malware
+Cisco, https://blogs.cisco.com/?s=google+android+malware
+Comodo, https://blog.comodo.com/?s=google%20android%20malware
+FireEye, https://www.fireeye.com/search.html?q=google+android+malware
+Fortinet, https://www.fortinet.com/blog/search.html?q=google+android+malware
+
+Dynamically loaded:
+Symantec, ??? - dynamic components to search and load...
+Sophos, https://news.sophos.com/en-us/?s=google+android+malware - dynamic components to load next information...
+KasperkyLab, https://www.kaspersky.com/blog/?s=google+android+malware - dynamic components to load next information...
+Cylance, https://threatvector.cylance.com/en_us/search.html?q=google%20android%20malware&type=threatvector_blog - dynamic components to load next information...
+Malwarebytes, https://blog.malwarebytes.com/?s=google%20android%20malware - dynamic components to load next information...
+Carbon Black, https://www.carbonblack.com/search/google+android+malware - dynamic components to load next information...
+Palo Alto Networks, https://www.paloaltonetworks.com/search#q=google%20android%20malware - dynamic components to load next information...
+Bitdefender, ???? no search
