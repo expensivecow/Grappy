@@ -7,6 +7,7 @@ import os
 import random
 import requests
 from lxml.html import fromstring
+from scrapy.utils.project import get_project_settings
 
 #---------------- DEFINED VARIABLES BGN ----------------#
 #---------------- DEFINED VARIABLES END ----------------#
@@ -48,9 +49,11 @@ def main():
 			#---------------- SCRAPE INDIVIDUAL PROJECT URLS END ----------------#
 
 def performBaseProjectScrape(downloadDirectory, language, link):
-	process = CrawlerProcess({
-	    'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
-	})
+	print(os.path.dirname(os.path.realpath(__file__)) + '/..')
+	sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/..')
+	os.environ['SCRAPY_SETTINGS_MODULE'] = 'Grappy.settings'
+
+	process = CrawlerProcess(get_project_settings())
 
 	baseSpider = BaseSpider.BaseSpider()
 	print(baseSpider.maxPages)
@@ -80,6 +83,8 @@ def reupdateProxies(mainDir):
 			proxy = "https://" + ":".join([i.xpath('.//td[1]/text()')[0], i.xpath('.//td[2]/text()')[0]])
 			f.write(proxy + '\n')
 	f.close()
+
+	print("Finished scraping currently existing proxies")
 	return proxies
 
 if __name__== "__main__":

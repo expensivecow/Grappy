@@ -5,7 +5,7 @@ import requests
 from lxml.html import fromstring
 
 class BaseSpider(scrapy.Spider):
-    name = "quotes"
+    name = "BaseSpider"
     projectURLs = []
     currentPagesScraped = 0
 
