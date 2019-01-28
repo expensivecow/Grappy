@@ -9,7 +9,7 @@ class ProjectSpider(scrapy.Spider):
             self.start_urls = [url_input]
         else:
             print("**************************************")
-            print("No Links to Query")
+            print("No Links to Query in project spider")
             print("**************************************")
         super().__init__(**kwargs)  # python3
 

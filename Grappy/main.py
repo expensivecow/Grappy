@@ -3,6 +3,7 @@ import scrapy
 from spiders import ProjectSpider as Spider
 from spiders import BaseSpider as BaseSpider
 from scrapy.crawler import CrawlerProcess
+from scrapy.settings import Settings
 import os
 import random
 import requests
@@ -27,8 +28,8 @@ def main():
 			language = data[0]
 			link = data[1]
 
-			performBaseProjectScrape(downloadDirectory = mainDir + '/temp/projects/', language = language, link = link)
 			#reupdateProxies(mainDir)
+			performBaseProjectScrape(downloadDirectory = mainDir + '/temp/projects/', language = language, link = link)
 			#---------------- SCRAPE INDIVIDUAL PROJECT URLS BGN ----------------#
 			'''
 			urls = [
@@ -49,19 +50,22 @@ def main():
 			#---------------- SCRAPE INDIVIDUAL PROJECT URLS END ----------------#
 
 def performBaseProjectScrape(downloadDirectory, language, link):
-	print(os.path.dirname(os.path.realpath(__file__)) + '/..')
 	sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/..')
 	os.environ['SCRAPY_SETTINGS_MODULE'] = 'Grappy.settings'
 
-	process = CrawlerProcess(get_project_settings())
+	settings = get_project_settings()
+	process = CrawlerProcess(settings)
 
-	baseSpider = BaseSpider.BaseSpider()
-	print(baseSpider.maxPages)
 	urls = ['https://github.com/search?l=JavaScript&o=desc&q=language%3AC&s=&type=Repositories']
-	process.crawl(baseSpider, start_urls = urls)
+
+	baseSpider = BaseSpider.BaseSpider(start_urls = urls)
+
+	process.crawl(baseSpider, start_urls = urls, maxPages = 50)
 	process.start()
 
-	if (baseSpider.projectURLs is not None):
+	print('project URLS: ' + str(baseSpider.projectURLs))
+
+	if (len(baseSpider.projectURLs) > 0):
 		file = open(downloadDirectory+language+'Projects.txt', 'w')
 		file.truncate(0)
 

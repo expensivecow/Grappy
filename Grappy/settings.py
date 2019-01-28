@@ -8,7 +8,6 @@
 #     https://doc.scrapy.org/en/latest/topics/settings.html
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-
 BOT_NAME = 'Grappy'
 
 SPIDER_MODULES = ['Grappy.spiders']
@@ -16,21 +15,19 @@ NEWSPIDER_MODULE = 'Grappy.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'Grappy (+http://www.yourdomain.com)'
-USER_AGENT = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0"
+USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 LOG_LEVEL = 'DEBUG'
-LOG_ENABLED = 0
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 2
+CONCURRENT_REQUESTS = 1
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 10
+DOWNLOAD_DELAY = 5
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 CONCURRENT_REQUESTS_PER_IP = 1
@@ -54,24 +51,38 @@ COOKIES_ENABLED = True
 #}
 
 # Retry many times since proxies often fail
-RETRY_TIMES = 10
+RETRY_TIMES = 15
 # Retry on most error codes since proxies fail for different reasons
 RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 404, 408, 429]
 
 DOWNLOADER_MIDDLEWARES = {
-    'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
-    'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
     'scrapy.downloadermiddlewares.retry.RetryMiddleware': 90,
-    'Grappy.randomproxy.RandomProxy': 600,
+    'Grappy.randomproxy.RandomProxy': 100,
     'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
+    'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
+    'random_useragent.RandomUserAgentMiddleware': 400
 }
 
-ROTATING_PROXY_LIST_PATH = '/home/mike/Dev/Git/Grappy/Grappy/config/proxylist.txt'
+# Proxy list containing entries like
+# http://host1:port
+# http://username:password@host2:port
+# http://host3:port
+# ...
+PROXY_LIST = 'C:\\Users\\Cow\\Documents\\Git\\Grappy\\Grappy\\config\\proxylist.txt'
 
+# Proxy mode
+# 0 = Every requests have different proxy
+# 1 = Take only one proxy from the list and assign it to every requests
+# 2 = Put a custom proxy to use in the settings
+PROXY_MODE = 0
 
 # If proxy mode is 2 uncomment this sentence :
 #CUSTOM_PROXY = "http://host1:port"
 
+# If proxy mode is 2 uncomment this sentence :
+#CUSTOM_PROXY = "http://host1:port"
+
+USER_AGENT_LIST = "C:\\Users\\Cow\\Documents\\Git\\Grappy\\Grappy\\config\\useragents.txt"
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
